@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+			<title>IP</title>
+	</head>
+			<body>
+				<!-- Load external JavaScript -->
+				<script src="{{url_for('static', filename='IP_script.js')}}"></script>
+				<script>
+					var loadFile = function(event) {
+						var image = document.getElementById('output');
+						image.src = URL.createObjectURL(event.target.files[0]);
+					};
+					function CheckNumeric(e) {
+						if (window.event) // IE
+						{
+							if ((e.keyCode <48 || e.keyCode > 57) & e.keyCode != 8 && e.keyCode != 44) {
+								event.returnValue = false;
+								return false;
+							}
+						}
+						else { // Fire Fox
+							if ((e.which <48 || e.which > 57) & e.which != 8 && e.which != 44) {
+								e.preventDefault();
+								return false;
+							}
+						}
+					};
+				</script>
+			<form id="user_form" action = "/editImage" method = "POST" enctype = "multipart/form-data">
+					<fieldset>
+						<legend>Types of Actions?</legend>
+							<ol>
+								<br><li>Flip Horizontal</li>
+								<br><li>Flip Vertical</li>
+								<br><li>Rotate +45 Degrees(Clock Wise)</li>
+								<br><li>Rotate -45 Degrees(Anti-Clock Wise)</li>
+								<br><li>Convert to Grayscale</li>
+								<br><li>Resize Image</li>
+								<br><li>Thumbnail(300px X 300px)</li>
+								<br><li>Rotate Right(90 Degrees - Clock Wise)</li>
+								<br><li>Rotate Left(90 Degrees - Anti-Clock Wise)</li>
+							</ol>
+						<br>
+							<label for="ListOfActionsLabel">Provide list of numbers to perform actions on the Image:-</label>
+							<input type="Text" id="ListOfActions" name="ListOfActions" placeholder="List Of Actions" value="1,6,3,5" onkeypress="CheckNumeric(event);" required/>
+							</br>
+							<br>
+								<label for="Resize">If resize selected provide below mentioned details or default 1027 & 768 will be used:</label>
+								<br>
+									Height <input type="Text" id="Height" name="Height" value="1024" placeholder="Height" onkeypress="CheckNumeric(event);" required/>
+									& Width <input type="Text" id="Width" name="Width" value="768" placeholder="Width" onkeypress="CheckNumeric(event);" required/>
+								</br>
+							</br>
+							<br>
+								<input type="file" id="imageFile" name="imageFile" accept="image/*" onChange="loadFile(event)" required>
+								<p> <img id="output" width="200"/> </p>
+							</br>
+							<br>
+							<input value="Submit now" type="submit"/>
+						</br>
+						</fieldset>
+					</form>
+				</body>
+			</html>

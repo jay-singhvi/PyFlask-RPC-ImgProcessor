@@ -1,0 +1,34 @@
+openapi: 3.0.0
+tags:
+  - name: Image Modifier API
+get:
+  description: Modifing Image based on Parameters
+  parameters:
+    - name: rotateLeft
+      in: path
+      description: Left rotation
+      schema:
+        type: boolean
+        default: false
+      required: false
+    - name: rotateRight
+      in: path
+      description: Right rotation
+      schema:
+        type: boolean
+        default: false
+      required: false
+    - name: thumbnail
+      in: path
+      description: Create thumbnail
+      schema:
+        type: boolean
+        default: false
+      required: false
+responses:
+    '200':
+      description: Image Modified Successfully
+    '400':
+      description: Bad Request
+    '500':
+      description: Internal Server Error
