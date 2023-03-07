@@ -16,13 +16,16 @@ def ipMain():
     return render_template('ipMain.html')
 
 @app.route('/editImage',methods = ['GET', 'POST'])
-def editImage():  # sourcery skip: avoid-builtin-shadow
+def editImage():
+    for f in os.listdir(app.config['UPLOAD_FOLDER']):
+        os.remove(os.path.join(app.config['UPLOAD_FOLDER'], f))
+
     actions = request.form.getlist('ListOfActions')
     resizeHeight = int(request.form.getlist('Height')[0])
     resizeWidth = int(request.form.getlist('Width')[0])
     posted_file = request.files.get('imageFile', '')
     posted_file_name = request.files.get('imageFile', '').filename
-    # x = re.split(", |_|-|!|\+",actions[0])
+
     x = list(actions[0].replace(",","").replace(" ",""))
     print('============= List Of Actions =============', actions)
     print('============= Resize Height =============', resizeHeight)
