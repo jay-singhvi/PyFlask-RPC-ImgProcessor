@@ -5,7 +5,6 @@
 	<title>Hello Worl!</title>
 </head>
 <body>
-<h1>Hello World!</h1>
 <ul>
 {% for images in imageList %}
 <li><img src = "{{ url_for('static', filename=images)}}"></li>
